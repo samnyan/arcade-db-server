@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!--/*@thymesVar id="page" type="org.springframework.data.domain.Page"*/-->
+<nav th:fragment="pagination(page)" th:if="${page.totalPages gt 0}">
+
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${page.number eq 0} ? 'disabled'">
+            <a class="page-link"
+               aria-label="上一页"
+               th:href="'?page='+${page.number lt 2 ? 1 : page.number}"
+            >
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">上一页</span>
+            </a>
+        </li>
+        <li class="page-item" th:if="${page.number > 1 && page.totalPages > 8}">
+            <a class="page-link" href="?page=1">
+                <span th:text="..."></span>
+            </a>
+        </li>
+        <li class="page-item"
+            th:each="i : ${#numbers.sequence( page.totalPages > 7 ? ( page.totalPages > 7 + page.number ? ( page.number > 0 ? page.number : 1 ) : page.totalPages - 7 ) : 1 , page.totalPages > 7 + page.number ? ( page.number > 0 ? page.number + 7 : page.number + 8 ) : page.totalPages )}"
+            th:classappend="${i eq page.number + 1} ? 'active'"
+        >
+            <a class="page-link"
+               th:href="'?page=' + ${i}"
+               th:text="${i}"
+            ></a>
+        </li>
+        <li class="page-item" th:if="${page.number + 7 < page.totalPages}">
+            <a class="page-link" th:href="'?page=' + ${page.totalPages}">
+                <span th:text="..."></span>
+            </a>
+        </li>
+        <li class="page-item" th:classappend="${page.number + 1 eq page.totalPages} ? 'disabled'">
+            <a class="page-link"
+               aria-label="下一页"
+               th:href="'?page=' + ${page.number + 2}">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">下一页</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

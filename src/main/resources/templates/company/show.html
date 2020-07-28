@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title th:text="${company.name}"></title>
+</head>
+<body>
+<section layout:fragment="content">
+        <div class="row content-header">
+            <div class="col"><h3 th:text="${company.name}"></h3></div>
+
+            <div class="col col-lg-3 btn-group" role="group" sec:authorize="!isAnonymous()">
+                <a class="nav-item btn btn-secondary" th:href="@{/company/{id}/edit(id=${company.id})}">
+                    编辑条目
+                </a>
+                <a class="nav-item btn btn-secondary" th:href="@{/company/{id}/link(id=${company.id})}">
+                    编辑关联
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card">
+                    <img alt="company image" class="card-img-top" th:src="${company.imageUrl == '' ? '/css/noimage.png' : company.imageUrl}">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">简介</h6>
+                        <p class="card-text" th:text="${company.description}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header">
+                        Info
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">主页地址： <a th:text="${company.homePage}" th:href="${company.homePage}"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        关联系列
+                    </div>
+                    <ul class="list-group list-group-flush" th:each="series:${company.series}" th:object="${series}">
+                        <li class="list-group-item"><a th:href="@{/series/{id}(id=${series.id})}" th:text="${series.name}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        关联游戏
+                    </div>
+                    <ul class="list-group list-group-flush" th:each="game:${company.games}" th:object="${game}">
+                        <li class="list-group-item"><a th:href="@{/game/{id}(id=${game.id})}" th:text="${game.name}"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+</section>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>添加新系列</title>
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.min.css"/>
+    <script src="/js/bootstrap-datepicker.min.js"></script>
+    <script src="/js/bootstrap-datepicker.zh-CN.min.js"></script>
+</head>
+<body>
+<section layout:fragment="content" class="row">
+    <div class="col-md-8">
+        <h3>添加新系列</h3>
+        <form th:action="@{/series/new}" th:method="post" th:object="${series}">
+            <div class="form-group">
+                <label class="control-label">名称*</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'"
+                       th:field="*{name}" type="text">
+                <div class="invalid-feedback" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">图片</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('imageUrl')} ? 'is-invalid'"
+                       th:field="*{imageUrl}" type="text">
+                <div class="invalid-feedback" th:errors="*{imageUrl}" th:if="${#fields.hasErrors('imageUrl')}"></div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">发布日期</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('firstReleaseDate')} ? 'is-invalid'"
+                       th:field="*{firstReleaseDate}" type="text" id="firstReleaseDate">
+                <div class="invalid-feedback" th:errors="*{firstReleaseDate}" th:if="${#fields.hasErrors('firstReleaseDate')}"></div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">简介</label>
+                <textarea  class="form-control" th:classappend="${#fields.hasErrors('description')} ? 'is-invalid'"
+                           th:field="*{description}" rows="4"></textarea>
+                <div class="invalid-feedback" th:errors="*{description}" th:if="${#fields.hasErrors('description')}"></div>
+            </div>
+            <button type="submit" class="btn btn-outline-dark btn-block">提交</button>
+        </form>
+    </div>
+</section>
+<script layout:fragment="script">
+    $('#firstReleaseDate').datepicker({
+        format: "yyyy-mm-dd",
+        todayBtn: "linked",
+        language: "zh-CN",
+        autoclose: true,
+        todayHighlight: true
+    })
+</script>
+</body>
+</html>

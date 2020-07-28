@@ -1,0 +1,44 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+!.idea/compiler.xml
+!.idea/encodings.xml
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/vcs.xml
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+src/main/resources/application.yml
+
+!.idea/arcade-db-server.iml
+!.idea/compiler.xml
+
+node_modules/
+package-lock.json

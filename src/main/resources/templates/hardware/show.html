@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh" layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${hardware.name}"></title>
+</head>
+<body>
+<section class="row" layout:fragment="content">
+    <div class="col-md-8">
+        <h3 th:text="${hardware.name}"></h3>
+        <h5 th:text="${hardware.model}"></h5>
+        <p th:text="${hardware.description}"></p>
+        <div class="card">
+            <div class="card-header">
+                关联系列
+            </div>
+            <ul class="list-group list-group-flush" th:each="series:${hardware.series}" th:object="${series}">
+                <li class="list-group-item"><a th:href="@{/series/{id}(id=${series.id})}" th:text="${series.name}"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                关联游戏
+            </div>
+            <ul class="list-group list-group-flush" th:each="game:${hardware.games}" th:object="${game}">
+                <li class="list-group-item"><a th:href="@{/game/{id}(id=${game.id})}" th:text="${game.name}"></a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+</body>
+</html>

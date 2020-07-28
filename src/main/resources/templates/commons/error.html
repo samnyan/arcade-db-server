@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="zh" layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${message}"></title>
+</head>
+<body>
+<section class="row" layout:fragment="content">
+    <div class="col-md-8">
+        <h3 th:text="${message}"></h3>
+    </div>
+</section>
+</body>
+</html>

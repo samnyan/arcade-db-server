@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>全部游戏</title>
+</head>
+<body>
+<section layout:fragment="content" >
+    <h3>全部游戏</h3>
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">图片</th>
+                    <th scope="col">名称</th>
+                    <th scope="col">发布时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="game:${gameList}" th:object="${game}">
+                    <td class="table-img">
+                        <a class="" th:href="@{/game/{id}(id=*{id})}">
+                            <img alt="game logo" class="img-thumbnail" th:src="${game.imageUrl == '' ? '/css/noimage.png' : game.imageUrl}">
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/game/{id}(id=*{id})}" th:text="*{name}"></a>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <nav th:replace="commons/pagination :: pagination(${page})"></nav>
+        </div>
+        <div class="col-md">
+            <div class="card">
+                <div class="card-header">
+                    类型
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a class="btn">音乐类</a>
+                    </li>
+                </ul>
+                <div class="card-header">
+                    发布时间
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a class="btn">2019年</a>
+                        <a class="btn">2018年</a>
+                    </li>
+                </ul>
+                <div class="card-body">
+                    <a class="btn" href="/game/new">创建新条目</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+</body>
+</html>

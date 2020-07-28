@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh" layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${cabinet.game.name}"></title>
+</head>
+<body>
+<section layout:fragment="content" >
+    <div class="row content-header">
+        <div class="col"><h3 th:text="${cabinet.game.name}"></h3></div>
+
+        <div class="col col-lg-3 btn-group" role="group" sec:authorize="!isAnonymous()">
+            <a class="nav-item btn btn-secondary" th:href="@{/location/{locationId}/cabinet/{cabinetId}/edit(locationId=${locationId},cabinetId=${cabinet.id})}">
+                编辑条目
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header">
+                    Info
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">游戏： <a th:text="${cabinet.game.name}" th:href="@{/game/{id}(id=${cabinet.game.id})}"></a></li>
+                    <li class="list-group-item">框体： <a th:text="${cabinet.hardware.name}+' '+${cabinet.hardware.model}" th:href="@{/hardware/{id}(id=${cabinet.hardware.id})}"></a></li>
+                    <li class="list-group-item">备注： <span th:text="${cabinet.remark}"></span></li>
+                    <li class="list-group-item">价格： <span th:text="${cabinet.price}"></span>币</li>
+                    <li class="list-group-item">机况： <span th:text="${cabinet.condition}"></span></li>
+                    <li class="list-group-item">描述： <span th:text="${cabinet.description}"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

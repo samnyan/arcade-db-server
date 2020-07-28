@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title th:text="${series.name}"></title>
+</head>
+<body>
+<section layout:fragment="content">
+    <h3 th:text="${series.name}">系列名称</h3>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <img alt="company image" class="card-img-top" th:src="${series.imageUrl == '' ? '/css/noimage.png' : series.imageUrl}">
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                    Info
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">简介: <span th:text="${series.description}"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    关联游戏
+                </div>
+                <ul class="list-group list-group-flush" th:each="game:${series.games}" th:object="${game}">
+                    <li class="list-group-item"><a th:href="@{/game/{id}(id=${game.id})}" th:text="${game.name}"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

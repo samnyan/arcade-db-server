@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh" layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${location.name}+' 机台列表'"></title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="row content-header">
+        <div class="col"><h3 th:text="${location.name}+' 机台列表'"></h3></div>
+
+        <div class="col col-lg-3 btn-group" role="group" sec:authorize="!isAnonymous()">
+            <a class="nav-item btn btn-secondary" th:href="@{/location/{locationId}/cabinet/add(locationId=${location.id})}">
+                添加机台
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">图片</th>
+                    <th scope="col">名称</th>
+                    <th scope="col">价格</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cabinet:${location.cabinets}" th:object="${cabinet}">
+                    </th>
+                    <td class="table-img">
+                        <a class="" th:href="@{/location/{locationId}/cabinet/{id}(locationId=${location.id},id=*{id})}">
+                            <img alt="game logo" class="img-thumbnail" src="/drs.jpg">
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/location/{locationId}/cabinet/{id}(locationId=${location.id},id=*{id})}" th:text="*{game.name}"></a>
+                    </td>
+                    <td>
+                        <span th:text="*{price}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>添加新街机厅</title>
+</head>
+<body>
+<section layout:fragment="content" class="row">
+    <div class="col-md-8">
+        <h3>添加新街机厅</h3>
+        <form th:action="@{/location/new}" th:method="post" th:object="${location}">
+            <div class="form-group">
+                <label class="control-label">名称*</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'"
+                       th:field="*{name}" type="text">
+                <div class="invalid-feedback" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">图片</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('imageUrl')} ? 'is-invalid'"
+                       th:field="*{imageUrl}" type="text">
+                <div class="invalid-feedback" th:errors="*{imageUrl}" th:if="${#fields.hasErrors('imageUrl')}"></div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">地址*</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('address')} ? 'is-invalid'"
+                       th:field="*{address}" type="text">
+                <div class="invalid-feedback" th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">网站</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('website')} ? 'is-invalid'"
+                       th:field="*{website}" type="text">
+                <div class="invalid-feedback" th:errors="*{website}" th:if="${#fields.hasErrors('website')}"></div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">联系方式</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('contact')} ? 'is-invalid'"
+                       th:field="*{contact}" type="text">
+                <div class="invalid-feedback" th:errors="*{contact}" th:if="${#fields.hasErrors('contact')}"></div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">简介</label>
+                <textarea  class="form-control" th:classappend="${#fields.hasErrors('description')} ? 'is-invalid'"
+                           th:field="*{description}" rows="4"></textarea>
+                <div class="invalid-feedback" th:errors="*{description}" th:if="${#fields.hasErrors('description')}"></div>
+            </div>
+            <button type="submit" class="btn btn-outline-dark btn-block">提交</button>
+        </form>
+    </div>
+</section>
+<script layout:fragment="script">
+</script>
+</body>
+</html>

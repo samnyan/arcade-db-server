@@ -1,0 +1,40 @@
+/*.item-list {*/
+/*    padding-left: 0;*/
+/*    background-color: #fff;*/
+/*    background-clip: border-box;*/
+/*    border: 1px solid rgba(0,0,0,.125);*/
+/*    border-radius: .25rem;*/
+/*}*/
+/*.item-list .item {*/
+/*    padding: 7px 5px;*/
+/*    height: 150px;*/
+/*}*/
+
+/*.item-list .item a {*/
+/*    margin: auto;*/
+/*}*/
+
+/*.item-list-item a img {*/
+
+/*}*/
+
+.table-img {
+    width: 120px;
+    padding-left: 0;
+}
+
+.table-id {
+    width: 12px;
+}
+
+.content-header {
+    margin-bottom: 12px;
+}
+
+.card {
+    margin-bottom: 15px;
+}
+
+.btn-group {
+    max-height: 41px;
+}

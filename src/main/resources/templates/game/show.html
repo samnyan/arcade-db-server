@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh" layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${game.name}"></title>
+</head>
+<body>
+<section layout:fragment="content" >
+    <div class="row content-header">
+        <div class="col"><h3 th:text="${game.name}"></h3></div>
+
+        <div class="col col-lg-3 btn-group" role="group" sec:authorize="!isAnonymous()">
+            <a class="nav-item btn btn-secondary" th:href="@{{id}/edit(id=${game.id})}">
+                编辑条目
+            </a>
+            <a class="nav-item btn btn-secondary" th:href="@{{id}/link(id=${game.id})}">
+                编辑关联
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <img src="/drs.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">简介</h6>
+                    <p class="card-text" th:text="${game.description}"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header">
+                    Info
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">关联系列： <a th:href="@{/series/{id}(id=${game.series.id})}"
+                                                         th:if="${game.series}"
+                                                         th:text="${game.series.name}"></a></li>
+                    <li class="list-group-item">游戏类型： <span th:text="${game.genre.displayName}"></span></li>
+                    <li class="list-group-item">制作公司：
+                        <span th:switch="${!game.companies.isEmpty()}">
+                            <span th:case="true" >
+                                <span th:each="company, iterStat : ${game.companies}">
+                                    <a th:href="@{/company/{id}(id=${company.id})}"
+                                       th:text="${company.name}"
+                                    ></a>
+                                <span th:unless="${iterStat.last}">、</span>
+                                </span>
+                            </span>
+                            <span th:case="false" th:text="未关联"></span>
+                        </span>
+
+                    </li>
+                    <li class="list-group-item">稼动时间： </li>
+                    <li class="list-group-item">...</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

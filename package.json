@@ -1,0 +1,22 @@
+{
+  "name": "arcade-db-server",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "gulp-watch": "gulp watch"
+  },
+  "dependencies": {
+    "gulp": "4.0.2",
+    "gulp-watch": "^5.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/sam_nya/arcade-db-server.git"
+  },
+  "author": "sam_nya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/sam_nya/arcade-db-server/issues"
+  },
+  "homepage": "https://gitlab.com/sam_nya/arcade-db-server#readme"
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh" layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>全部街机厅</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <h3>全部街机厅</h3>
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">图片</th>
+                    <th scope="col">名称</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="location:${locationList}" th:object="${location}">
+                    <td class="table-img">
+                        <a class="" th:href="@{/location/{id}(id=*{id})}">
+                            <img alt="location logo" class="img-thumbnail" th:src="${location.imageUrl == '' ? '/css/noimage.png' : location.imageUrl}">
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/location/{id}(id=*{id})}" th:text="*{name}"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <nav th:replace="commons/pagination :: pagination(${page})"></nav>
+        </div>
+        <div class="col-md">
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+</body>
+</html>

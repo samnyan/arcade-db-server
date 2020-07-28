@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh" layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${location.name}"></title>
+    <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=6DGBZ-MGSWU-P4UVD-4MAWX-6ADZS-JEBR5"></script>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="row content-header">
+        <div class="col"><h3 th:text="${location.name}"></h3></div>
+
+        <div class="col col-lg-3 btn-group" role="group" sec:authorize="!isAnonymous()">
+            <a class="nav-item btn btn-secondary" th:href="@{/location/{id}/edit(id=${location.id})}">
+                编辑条目
+            </a>
+            <a class="nav-item btn btn-secondary" th:href="@{/location/{id}/link(id=${location.id})}">
+                编辑关联
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <img alt="..." class="card-img-top" th:src="${location.imageUrl == '' ? '' : location.imageUrl}">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">简介</h6>
+                    <p class="card-text" th:text="${location.description}"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                    Info
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">地址： <span th:text="${location.address}"></span></li>
+                    <li class="list-group-item">状态： <span th:text="${location.status.displayName}"></span></li>
+                    <li class="list-group-item">开放时间： <span th:text="${location.workTime}"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-header">
+                    地图
+                </div>
+                <div id="map_container" style="width: 100%;height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-header">
+                    <span class="mr-auto">机台列表</span>
+                    <a th:href="@{/location/{id}/cabinet(id=${location.id})}" style="float:right;">查看全部</a>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:each="cabinet:${location.cabinets}" th:object="${cabinet}">
+                        <span th:text="*{game.name}"></span> <span th:text="*{price+'币'}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<script layout:fragment="script" th:inline="javascript">
+    var unicodeUnescape = function(str) {
+        var result = '', strs = str.match(/\\u.{4}/ig);
+        if (!strs) return '';
+        for (var i = 0, len = strs.length; i < len; i++) {
+            result += String.fromCharCode(strs[i].replace('\\u', '0x'));
+        }
+        return result;
+    };
+
+    /*<![CDATA[*/
+    const latitude = /*[[${location.latitude}]]*/ 0.0;
+    const longitude = /*[[${location.longitude}]]*/ 0.0;
+    let address = /*[[${location.address}]]*/ '';
+    // address = unicodeUnescape(address);
+    /*]]>*/
+
+    let callback = {
+        complete: function init(result) {
+            let map = new qq.maps.Map(document.getElementById("map_container"), {
+                center: result.detail.location,
+                zoom:15
+            });
+            let marker = new qq.maps.Marker({
+                position: result.detail.location,
+                map: map
+            });
+        }
+    };
+    window.onload = function(){
+        let geocoder = new qq.maps.Geocoder(callback);
+        geocoder.getLocation(address);
+    }
+
+</script>
+</body>
+</html>

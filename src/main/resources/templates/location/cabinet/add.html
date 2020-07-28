@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>添加机台</title>
+</head>
+<body>
+<section layout:fragment="content" class="row">
+    <div class="col-md-8">
+        <h3>添加机台</h3>
+        <form th:action="@{/location/{id}/cabinet/add(id=${location.id})}" th:method="post" th:object="${cabinet}">
+            <div class="form-group">
+                <label class="control-label">所属机厅*</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('location.id')} ? 'is-invalid'"
+                       th:field="*{location.id}" type="number" th:value="${location.id}" readonly>
+                <div class="invalid-feedback" th:errors="*{location}" th:if="${#fields.hasErrors('location')}"></div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">游戏ID</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('game.id')} ? 'is-invalid'"
+                       th:field="*{game.id}" type="number">
+            </div>
+            <div class="form-group">
+                <label class="control-label">框体ID</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('hardware.id')} ? 'is-invalid'"
+                       th:field="*{hardware.id}" type="number">
+            </div>
+            <div class="form-group">
+                <label class="control-label">价格</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('price')} ? 'is-invalid'"
+                       th:field="*{price}" type="number">
+            </div>
+            <div class="form-group">
+                <label class="control-label">备注</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('remark')} ? 'is-invalid'"
+                       th:field="*{remark}" type="text">
+            </div>
+            <div class="form-group">
+                <label class="control-label">机况</label>
+                <input class="form-control" th:classappend="${#fields.hasErrors('condition')} ? 'is-invalid'"
+                       th:field="*{condition}" type="text">
+            </div>
+            <div class="form-group">
+                <label class="control-label">描述</label>
+                <textarea  class="form-control" th:classappend="${#fields.hasErrors('description')} ? 'is-invalid'"
+                           th:field="*{description}" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-outline-dark btn-block">提交</button>
+        </form>
+    </div>
+</section>
+<script layout:fragment="script">
+</script>
+</body>
+</html>
